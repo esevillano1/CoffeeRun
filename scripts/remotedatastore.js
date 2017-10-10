@@ -12,7 +12,8 @@
   }
 
   RemoteDataStore.prototype.add = function(key, data) {
-    $.ajax(this.serverUrl, {
+    $.ajax({
+      url: this.serverUrl,
       type: 'POST',
       success: $.post(this.serverUrl, data, function(serverResponse) {
         console.log(serverResponse);
@@ -29,7 +30,8 @@
   };
 
   RemoteDataStore.prototype.getAll = function() {
-    $.ajax(this.serverUrl, {
+    $.ajax({
+      url: this.serverUrl,
       type: 'GET',
       success: $.get(this.serverUrl, function(serverResponse) {
         console.log(serverResponse);
@@ -40,10 +42,11 @@
     });
   };
 
-  RemoteDataStore.prototype.get = function(key) {
-    $.ajax(this.serverUrl + '/' + key, {
+  RemoteDataStore.prototype.get = function(id) {
+    $.ajax({
+      url: this.serverUrl + '/' + id,
       type: 'GET',
-      success: $.get(this.serverUrl + '/' + key, function(serverResponse) {
+      success: $.get(this.serverUrl + '/' + id, function(serverResponse) {
         console.log(serverResponse);
       }),
       error: function(xhr) {
@@ -52,8 +55,9 @@
     });
   };
 
-  RemoteDataStore.prototype.remove = function(key) {
-    $.ajax(this.serverUrl + '?emailAddress=' + key, {
+  RemoteDataStore.prototype.remove = function(id, key) {
+    $.ajax({
+      url: this.serverUrl + '/' + id + '?emailAddress=' + key,
       type: 'DELETE',
       success: function(serverResponse) {
         console.log(serverResponse);

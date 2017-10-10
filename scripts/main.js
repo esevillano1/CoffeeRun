@@ -25,5 +25,10 @@
 
   formHandler.addInputHandler(Validation.isCompanyEmail);
 
+  var orders = Object.keys('remoteDS.getAll()');
+  orders.forEach(function(data){
+    checkList.addRow(window.checkList, data);
+  });
+
   console.log(formHandler);
 })(window);
